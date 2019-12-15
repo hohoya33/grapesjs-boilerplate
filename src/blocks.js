@@ -1,7 +1,6 @@
-import path from "path";
 import nunjucks from "nunjucks";
-import buttonTemplate from "./components/button.html";
-import macro_com_unit from "./components/macro_com_unit.html";
+import buttonTemplate from "./html/partials/button.html";
+import macro_com_unit from "./html/partials/macro_com_unit.html";
 
 nunjucks.configure("src", {
 	autoescape: false,

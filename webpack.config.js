@@ -42,14 +42,7 @@ module.exports = (env = {}) => {
 				},
 				{
 					test: /\.html$/,
-					use: [
-						{
-							loader: "html-loader",
-							options: {
-								minimize: true
-							}
-						}
-					]
+					use: ["html-loader"]
 				}
 			]
 		},
