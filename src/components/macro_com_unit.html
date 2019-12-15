@@ -1,0 +1,125 @@
+[[% macro macro_com_unit(options) %]] [[% set config = { width: options.width | default(290), height: options.height | default(290), label: options.label | default(true), best: options.best |
+default(false), rating: options.rating | default(true), ad: options.ad | default(false), index: options.index } %]]
+<div class="cunit_prod">
+	[[% if config.best %]]
+	<div class="prod_top">
+		<span class="tx_best">[[$ '0' if config.index < 10 $]][[$ config.index $]]</span>
+	</div>
+	[[% endif %]]
+	<div class="thmb">
+		<a href="#">
+			<img src="http://item.ssgcdn.com/59/06/47/item/1000021470659_i1_500.jpg" width="[[$ config.width $]]" height="[[$ config.height $]]" alt="상품명" class="i1" />
+			<img src="http://item.ssgcdn.com/59/06/47/item/1000021470659_i2_500.jpg" width="[[$ config.width $]]" height="[[$ config.height $]]" alt="상품명" class="i2" aria-hidden="true" />
+			[[% if config.label %]]
+			<div class="cm_bdg_v2 notranslate" aria-label="혜택">
+				<span class="di_sale"><span class="blind">세일</span>30<em class="per">%</em></span>
+				<span class="di_better"><span class="blind">다다익선</span></span>
+				<!-- <span class="di_coupon"><span class="blind">쿠폰포함</span>10<em class="per">%</em></span>
+				<span class="di_enuri"><span class="blind">에누리</span>5<em class="per">%</em></span>
+				<span class="di_plus">2<em>+1</em></span>
+				<span class="di_plus2"><span class="blind">2입 기획</span></span>
+				<span class="di_gift"><span class="blind">사은품</span></span>
+				<span class="di_sale2"><span class="blind">특가</span></span>
+				<span class="di_onefree">3<em>for</em>2</span> -->
+			</div>
+			<div class="deiv_bdg notranslate" aria-label="배송방법">
+				<span class="ico_eparcel"><span class="blind">이마트 점포택배</span></span>
+			</div>
+			[[% endif %]]
+		</a>
+
+		<div class="exp_area notranslate">
+			<div class="opt_bx" aria-label="옵션"></div>
+			<div class="util_bx">
+				<a href="javascript:void(0)" class="cmqv_btn_view" data-layer-target="#ly_cmqv" data-replace-href="product/SG-product-A-001-01_quickview.html" role="button"
+					><span class="blind">간편보기</span></a
+				>
+				<a href="javascript:void(0)" class="blank"><span class="blind">새창보기</span></a>
+				<a href="javascript:void(0)" class="cart" role="button"><span class="blind">장바구니</span></a>
+				<!-- [D] 클립하였을 경우 on클래스 추가 -->
+				<span class="cm_clip cm_clip_item"
+					><a href="javascript:void(0)" class="sp_ccp sel_clip" role="button"><span class="blind tx_on">클립 함</span><span class="blind tx_off">클립 안함</span></a></span
+				>
+			</div>
+		</div>
+	</div>
+	[[% if config.ad %]]
+	<div class="tt_adinfo_n">
+		<a href="#" class="btn_tt_adinfo" aria-label="광고 상품">광고</a>
+		<div class="tt_adinfo_layer"><span class="bg_adinfo">&nbsp;</span>오반장의 광고구좌를 구매한<br />상품으로 입찰가 순으로 전시됩니다.</div>
+	</div>
+	[[% endif %]]
+</div>
+<div class="cunit_info">
+	<div class="cunit_tp">
+		<span class="cm_mall_ic ty_rect_s notranslate">
+			<i class="sm"><span class="blind">신세계몰</span></i>
+		</span>
+		<!-- <div class="dp_dv">
+			<span>오반장</span>
+			<span>해피바이러스</span>
+			<span>쓱콘</span>
+			<span>신문광고</span>
+			<span>우르르</span>
+			<span>1:1쓱톡</span>
+		</div> -->
+	</div>
+	<div class="cunit_md notranslate">
+		<div class="title">
+			<strong class="brd">
+				<em class="tx_ko">브랜드명(한)</em>
+				<em class="tx_en">english(영)</em>
+				<em class="tx_zh">中國(중)</em>
+			</strong>
+			<a href="#">
+				<em class="tx_ko">상품명상품명상품명상품명상품명상품명상품명상품명(한)</em>
+				<em class="tx_en">englishenglishenglishenglishenglishenglishenglish(영)</em>
+				<em class="tx_zh">中國語中國語中國語中國語中國語中國語中國語中(중)</em>
+			</a>
+		</div>
+	</div>
+	<div class="cunit_price notranslate">
+		<div class="opt_price">
+			<span class="blind">할인적용가</span>
+			<em class="ssg_price">56,644</em>
+			<span class="ssg_tx">원</span>
+			<div class="ssg_price_ko show_gl hide_ko">(￦60,131)</div>
+		</div>
+		<div class="org_price">
+			<span class="blind">판매가</span>
+			<em class="ssg_price">60,000</em>
+			<span class="ssg_tx">원</span>
+		</div>
+		<div class="dtl_price_wrap price-tooltip-wrap hide_gl">
+			<button class="btn_price price-tooltip"><span class="blind">가격 상세보기</span></button>
+			<div class="ly_dtl_price price-tooltip-layer">
+				<dl class="org">
+					<dt>판매가</dt>
+					<dd>25,800원</dd>
+				</dl>
+				<dl class="dis">
+					<dt>쿠폰</dt>
+					<dd>25,800원</dd>
+					<dt>S-머니 할인쿠폰</dt>
+					<dd>- 1,012,900원</dd>
+				</dl>
+				<dl class="sum">
+					<dt>최적가</dt>
+					<dd>12,900원</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	[[% if config.rating %]]
+	<div class="cunit_app">
+		<div class="rating">
+			<div class="rate_bg">
+				<span style="width:50%"><span class="blind">별점 50점</span></span>
+			</div>
+			<span class="rate_tx">(<em>284</em>건)</span>
+		</div>
+		<div class="buying"><em>482</em>개 구매중</div>
+	</div>
+	[[% endif %]]
+</div>
+[[% endmacro %]]
