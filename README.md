@@ -39,9 +39,9 @@ This boilerplate helps you quickly start a production ready plugin for GrapesJS.
 
 ## Options
 
-|Option|Description|Default|
-|-|-|-
-|`option1`|Description option|`default value`|
+| Option    | Description        | Default         |
+| --------- | ------------------ | --------------- |
+| `option1` | Description option | `default value` |
 
 
 
@@ -104,7 +104,6 @@ const editor = grapesjs.init({
 
 
 
-
 ## Development
 
 Clone the repository
@@ -133,3 +132,16 @@ $ npm start
 ## License
 
 BSD 3-Clause
+
+
+
+
+
+데이터 저장관련
+* [https://github.com/artf/grapesjs-preset-webpage/tree/master/src](https://github.com/artf/grapesjs-preset-webpage/tree/master/src)
+* [https://github.com/artf/grapesjs-custom-code/tree/master/src](https://github.com/artf/grapesjs-custom-code/tree/master/src)
+* [https://grapesjs.com/docs/modules/Storage.html#storage-api](https://grapesjs.com/docs/modules/Storage.html#storage-api)
+* [https://github.com/artf/grapesjs-firestore/blob/master/src/index.js](https://github.com/artf/grapesjs-firestore/blob/master/src/index.js)
+* [https://github.com/artf/grapesjs/issues/387](https://github.com/artf/grapesjs/issues/387)
+* [https://github.com/artf/grapesjs/issues/339](https://github.com/artf/grapesjs/issues/339)
+* [https://github.com/artf/grapesjs/issues/387](https://github.com/artf/grapesjs/issues/387)
