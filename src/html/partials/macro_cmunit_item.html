@@ -1,0 +1,287 @@
+[[% macro macro_cmunit_item(options) %]]
+[[% set config = {
+	width: options.width | default(500),
+	height: options.height | default(500),
+	key: options.key | default('_key'),
+	index: options.index | default(1),
+	cmunit_best: options.cmunit_best | default(false),
+	cmunit_rank: options.cmunit_rank | default(false),
+	cmunit_bdg_buydone: options.cmunit_bdg_buydone | default(false),
+	cmunit_bdg_always: options.cmunit_bdg_always | default(false),
+	cmunit_bdg_taste: options.cmunit_bdg_taste | default(false),
+	cmunit_chk: options.cmunit_chk | default(false),
+	cmunit_bdg_countdown: options.cmunit_bdg_countdown | default(false),
+	cmunit_bdg_deadline: options.cmunit_bdg_deadline | default(false),
+	cmunit_btn_gift : options.cmunit_btn_gift | default(false),
+	cmunit_soldout : options.cmunit_soldout | default(false),
+	cmunit_sideinfo : options.cmunit_sideinfo | default(true),
+	jquery_tmpl : options.jquery_tmpl | default(false)
+} %]]
+<div class="cmunit_item">
+	[[% if config.cmunit_best or config.cmunit_rank or config.cmunit_bdg_buydone or config.cmunit_bdg_always or config.cmunit_bdg_taste or config.cmunit_bdg_taste or config.cmunit_chk or config.cmunit_bdg_countdown or config.cmunit_bdg_deadline %]]
+	<div class="cmunit_helper"><!-- [D] .cmunit_helper_el 이 하나라도 없으면 .cmunit_helper 구조 삭제 -->
+		[[% if config.cmunit_best %]]
+		<div class="cmunit_helper_el cmunit_best">[[$ '0' if config.index < 10 $]][[$ config.index $]]</div>
+		[[% endif %]]
+		[[%- if config.cmunit_rank %]]
+		<div class="cmunit_helper_el cmunit_rank cmunit_rank_up"><em class="cmunit_rank_num">2</em><span class="blind">순위 상승</span></div>
+		<div class="cmunit_helper_el cmunit_rank cmunit_rank_down"><em class="cmunit_rank_num">2</em><span class="blind">순위 하락</span></div>
+		<div class="cmunit_helper_el cmunit_rank cmunit_rank_new"><span class="blind">NEW</span></div>
+		<div class="cmunit_helper_el cmunit_rank cmunit_rank_same"><span class="blind">순위 동일</span></div>
+		[[%- endif %]]
+		[[% if config.cmunit_bdg_buydone %]]
+		<div class="cmunit_helper_el cmunit_bdg_buydone">구매완료</div>
+		<div class="cmunit_helper_el cmunit_bdg_option"><span class="cmunit_opt_tit">옵션</span><span class="cmunit_opt_txt">블랙 / 280</span></div>
+		[[% endif %]]
+		[[% if config.cmunit_bdg_always %]]
+		<div class="cmunit_helper_el cmunit_bdg_always">자주구매</div>
+		[[% endif %]]
+		[[% if config.cmunit_bdg_taste %]]
+		<div class="cmunit_helper_el cmunit_bdg_taste">80회 구매상품</div>
+		<div class="cmunit_helper_el cmunit_bdg_taste">장바구니에 담은 상품</div>
+		[[% endif %]]
+		[[% if config.cmunit_chk %]]
+		<div class="cmunit_helper_el cmunit_chk">
+			<input type="checkbox" id="[[$ config.key $]][[$ config.index $]]" class="cmunit_chk_inp">
+			<label for="[[$ config.key $]][[$ config.index $]]" class="cmunit_chk_lbl"><span class="blind">{{ [D] 상품명만 기입 }}</span></label>
+		</div>
+		[[% endif %]]
+		[[% if config.cmunit_bdg_countdown %]]
+		<div class="cmunit_helper_el cmunit_bdg_countdown">남은수량 680개</div>
+		[[% endif %]]
+		[[% if config.cmunit_bdg_deadline %]]
+		<div class="cmunit_helper_el cmunit_bdg_deadline">매진임박</div>
+		[[% endif %]]
+	</div>
+	[[% endif %]]
+	<div class="cmunit_goods[[% if config.cmunit_soldout === true %]] cmunit_status_soldout[[% endif %]]"><!-- [D] 품절시 cmunit_status_soldout 클래스 추가 -->
+		<div class="cmunit_thmb">
+			<a href="[[$ 'http://www.ssg.com/' if config.jquery_tmpl else '#링크' $]]" class="cmunit_thmb_link">
+				<div class="cmunit_thmb_imgbx">
+					<img src="http://placehold.it/[[$ config.width $]]x[[$ config.height $]]" alt="{{ [D] 상품명만 기입 }}" class="cmunit_thmb_img">
+				</div>
+				
+			</a>
+			<a href="#" class="cmunit_btn_play"><span class="blind">동영상 재생하기</span></a>
+			<div class="ssg-tooltip-wrap sr_toggle cmunit_tt_adinfo">
+				<em class="blind">광고</em>
+				<a href="#" class="ssg-tooltip cmunit_btn_tt_adinfo" role="button"><span class="sr_off"><span class="blind">광고란? 툴팁 열기</span></span><span class="sr_on"><span class="blind">광고란? 툴팁 닫기</span></span></a>
+				<div class="ssg-tooltip-layer cmunit_tt_adinfo_layer" role="tooltip" aria-label="광고란?">
+					광고구좌를<br>구매한 상품으로 <br>입찰가 순으로 전시됩니다.
+					<button type="button" class="ssg-tooltip-close cmunit_close_tt_adinfo"><span class="blind">툴팁 닫기</span></button>
+				</div>
+			</div>
+			<div class="cmunit_thmb_ctrl">
+				<a href="javascript:alert('이미지검색')" class="cmunit_btn_lens"><span class="blind">이 상품 이미지로 검색하기</span></a>
+			</div>
+			[[% if config.cmunit_soldout === true %]]
+			<div class="cmunit_soldout">
+				<div class="cmunit_soldout_col cmunit_ty_tx">
+					<strong class="cmunit_soldout_tx">일시품절</strong>
+				</div>
+				<div class="cmunit_soldout_col cmunit_ty_btn">
+					<button type="button" class="cmunit_btn_enter" onclick="alert('입고알림')">입고알림</button>
+				</div>
+				<div class="cmunit_soldout_col cmunit_ty_btn">
+					<button type="button" data-replace-code="0006637008" data-replace-title="대체상품" class="cmunit_btn_change">대체상품<span class="blind">팝업 열기</span></button>
+				</div>
+			</div>
+			[[% endif %]]
+		</div>
+		<div class="cmunit_detailbx">
+			<div class="cmunit_tx_thmb">
+				<div class="cmunit_mall">
+					<span class="cm_mall_ic ty_circle_s">
+						<!-- <i class="ssg"><span class="blind">SSG.COM</span></i>
+						<i class="sm"><span class="blind">신세계몰</span></i>
+						<i class="sd"><span class="blind">신세계백화점</span></i>
+						<i class="em"><span class="blind">이마트몰</span></i>
+						<i class="tr"><span class="blind">트레이더스</span></i>
+						<i class="mnmorning"><span class="blind">새벽배송</span></i>
+						<i class="bt"><span class="blind">Boots</span></i>
+						<i class="tv"><span class="blind">신세계TV쇼핑</span></i>
+						<i class="si"><span class="blind">S.I.VILLAGE</span></i>
+						<i class="outlet"><span class="blind">프리미엄 아울렛</span></i>
+						<i class="mncasamia"><span class="blind">까사미아</span></i>
+						<i class="sf"><span class="blind">스타필드</span></i>
+						<i class="hwd"><span class="blind">howdy</span></i>
+						<i class="mndeptfood"><span class="blind">백화점식품관</span></i> -->
+						<i class="mnchicor"><span class="blind">CHICOR</span></i>
+					</span>
+					<span class="cm_mall_ic ty_circle_m">
+						<!-- <i class="ssg"><span class="blind">SSG.COM</span></i>
+						<i class="sm"><span class="blind">신세계몰</span></i>
+						<i class="sd"><span class="blind">신세계백화점</span></i>
+						<i class="em"><span class="blind">이마트몰</span></i>
+						<i class="tr"><span class="blind">트레이더스</span></i>
+						<i class="mnmorning"><span class="blind">새벽배송</span></i>
+						<i class="bt"><span class="blind">Boots</span></i>
+						<i class="tv"><span class="blind">신세계TV쇼핑</span></i>
+						<i class="si"><span class="blind">S.I.VILLAGE</span></i>
+						<i class="outlet"><span class="blind">프리미엄 아울렛</span></i>
+						<i class="mncasamia"><span class="blind">까사미아</span></i>
+						<i class="sf"><span class="blind">스타필드</span></i>
+						<i class="hwd"><span class="blind">howdy</span></i>
+						<i class="mndeptfood"><span class="blind">백화점식품관</span></i> -->
+						<i class="mnchicor"><span class="blind">CHICOR</span></i>
+					</span>
+					<span class="cmunit_mall_tx">몰이름</span>
+					<span class="cmunit_svcstore_tx">백화점식품관</span>
+					<span class="cmunit_talk"><span class="blind">1:1쓱톡</span></span>
+					<div class="cmunit_btn_wrap">
+						<!-- [D] 클립하였을 경우 clip_on클래스 추가 -->
+						<span class="cm_clip cmunit_btn_clip clip_off"><a href="#" class="sel_clip"><span class="blind">클립</span></a></span>
+						[[% if config.cmunit_btn_gift %]]
+						<button class="cmunit_btn_gift" onclick="alert('선물하기')"><span class="blind">선물하기</span></button>
+						[[% else %]]
+						<button class="cmunit_btn_cart" onclick="alert('장바구니 담기')"><span class="blind">장바구니 담기</span></button><!-- [D] 비활성화 addClass="disabled" -->
+						[[% endif %]]
+					</div>
+				</div>
+				<a href="[[$ 'http://www.ssg.com/' if config.jquery_tmpl else '#링크' $]]" class="cmunit_tx_thmb_link">
+					<div class="cmunit_tit">
+						<span class="cmunit_goods_brand">[[$ '{{= page}}-{{= title}}' if config.jquery_tmpl else '에고이스트' $]]</span>
+						<span class="cmunit_goods_tit">프린트 쉬폰 티어드 스탠카라 원피스 핑크(ED2WO365)프린트 쉬폰 티어드 스탠카라 원피스 핑크(ED2WO365)</span>
+					</div>
+					<div class="cmunit_pricewrap">
+						<div class="cmunit_price_row cmunit_ty_oldpr">
+							<div class="old_price">
+								<del><span class="blind">정상가격</span><em class="ssg_price">10,236,800</em><span class="ssg_tx">원</span></del>
+							</div>
+							<div class="cmunit_tx_sale cmunit_coupon">쿠폰포함</div>
+							<div class="cmunit_tx_sale cmunit_enuri">에누리</div>
+						</div>
+						<div class="cmunit_price_row cmunit_ty_newpr">
+							<div class="cmunit_prd_per"><span class="blind">할인율</span><span>49%</span></div>
+							<div class="new_price">
+								<span class="blind">판매가격</span>
+								<em class="ssg_price">10,236,800</em><span class="ssg_tx">원<span class="cm_tx_opt">~</span></span>
+							</div>
+							<div class="unit_price">100g 당 1,800원</div>
+						</div>
+					</div>
+				</a>
+				<div class="cmunit_btn_wrap">
+					<!-- [D] 클립하였을 경우 clip_on클래스 추가 -->
+					<span class="cm_clip cmunit_btn_clip clip_off"><a href="#" class="sel_clip"><span class="blind">클립</span></a></span>
+					[[% if config.cmunit_btn_gift %]]
+					<button class="cmunit_btn_gift" onclick="alert('선물하기')"><span class="blind">선물하기</span></button>
+					[[% else %]]
+					<button class="cmunit_btn_cart" onclick="alert('장바구니 담기')"><span class="blind">장바구니 담기</span></button><!-- [D] 비활성화 addClass="disabled" -->
+					[[% endif %]]
+				</div>
+			</div>
+			[[% if config.cmunit_sideinfo %]]
+			<div class="cmunit_sideinfo">
+				<div class="cmunit_benefit_lst">
+					<div class="cmunit_sideinfo_ty1">
+						<div class="cmunit_fund">
+							<em class="cmunit_fund_tit"><span class="blind">우르르</span></em>
+							<div class="cmunit_bar_w" aria-hidden="true"><span class="cmunit_bar" style="width:62%">&nbsp;</span></div>
+							<div class="cmunit_fund_tx">
+								<!-- <div class="cmunit_bar_tx"><span class="cmunit_per"><em>3,860%</em>목표달성</span> <span class="cmunit_date"><em>12</em>일 남음</span></div> -->
+								<div class="cmunit_bar_tx"><span class="cmunit_per"><em>3,860%</em>목표달성</span> <span class="cmunit_end">종료</span></div>
+								<div class="ssg-tooltip-wrap sr_toggle cmunit_tt_urr">
+									<a href="#" class="ssg-tooltip cmunit_btn_tt_urr" role="button"><span class="sr_off"><span class="blind">우르르란? 툴팁 열기</span></span><span class="sr_on"><span class="blind">우르르란? 툴팁 닫기</span></span></a>
+									<div class="ssg-tooltip-layer cmunit_tt_urr_layer" role="tooltip" aria-label="우르르란?">
+										기간 내 목표 달성 시 최종 결제 및<br />배송이 진행되는 상품입니다.
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="cmunit_sideinfo_block">
+							<div class="cmunit_review_area">
+								<span class="cmunit_ic_review"></span>
+								<span class="blind">상품평점 5점 만점에</span><span class="cmunit_review_score">4.8점</span>
+								<span class="blind">상품평</span><span class="cmunit_review_num">248건</span>
+							</div>
+							<div class="cmunit_deal_count cmunit_ty_obj">오반장 860개 구매중</div>
+							<div class="cmunit_deal_count cmunit_ty_hb">해피바이러스 3,860개 구매중</div>
+							<div class="cmunit_deal_count">860개 구매중</div>
+							<div class="cmunit_preorder">프리오더</div>
+						</div>
+						<div class="cmunit_sideinfo_block">
+							<span class="cmunit_o2o_bdg">청계점 픽업</span>
+							<span class="cmunit_o2o_bdg">퀵배송</span>
+							<div class="cmunit_o2o_bdg cmunit_magicpick_area">
+								<span class="cmunit_magicpick">매직픽업<button type="button" class="cmunit_btn_magicpick_tt"><span class="blind">매직픽업 점포 툴팁 열기</span></button></span>
+								<div class="cmunit_magicpick_tt_layer" role="tooltip" aria-label="매직픽업 점포">
+									<em>영등포점</em> / <em>강남점</em> / <em>센텀시티점</em> / <em>광주신세계</em>
+								</div>
+							</div>
+						</div>
+						<div class="cmunit_sideinfo_block">
+							<span class="cmunit_bene_bdg">N+1</span>
+							<span class="cmunit_bene_bdg">사은품</span>
+							<span class="cmunit_bene_bdg">다다익선</span>
+							<span class="cmunit_bene_bdg">3for2</span>
+							<span class="cmunit_bene_bdg">2입기획</span>
+						</div>
+						<div class="cmunit_sideinfo_block">
+							<span class="cmunit_bdg_ssgcon">쓱콘</span>
+							<span class="cmunit_bdg_ssgpaycon">쓱페이콘</span>
+						</div>
+						<div class="cmunit_sideinfo_block">
+							<span class="cmunit_eco_bdg">동물복지</span>
+							<span class="cmunit_promo_bdg">청구할인</span>
+							<span class="cmunit_promo_bdg">S-머니</span>
+							<span class="cmunit_promo_bdg">포인트</span>
+							<span class="cmunit_promo_bdg">카드할인</span>
+							<span class="cmunit_promo_bdg">무이자</span>
+							<span class="cmunit_promo_bdg">무료배송</span>
+						</div>
+						<div class="cmunit_sideinfo_block">
+							<a href="#" class="cmunit_tag">#건강식</a>
+							<a class="cmunit_tag">#맛있는아침</a>
+						</div>
+					</div>
+					<div class="cmunit_sideinfo_ty2">
+						<!-- [D] 우르르, 오반장, 해바 구매중 요소가 하나도 없으면 .cmunit_sideinfo_block.cmunit_ty_deal 구조 삭제 -->
+						<div class="cmunit_sideinfo_block cmunit_ty_deal">
+							<div class="cmunit_fund">
+								<em class="cmunit_fund_tit"><span class="blind">우르르</span></em>
+								<div class="cmunit_fund_tx">
+									<div class="cmunit_bar_tx"><span class="cmunit_per"><em>3,860%</em>목표달성</span> <span class="cmunit_date"><em>12</em>일 남음</span></div>
+									<!-- <div class="cmunit_bar_tx"><span class="cmunit_per"><em>3,860%</em>목표달성</span> <span class="cmunit_end">종료</span></div> -->
+									<div class="ssg-tooltip-wrap sr_toggle cmunit_tt_urr">
+										<a href="#" class="ssg-tooltip cmunit_btn_tt_urr" role="button"><span class="sr_off"><span class="blind">우르르란? 툴팁 열기</span></span><span class="sr_on"><span class="blind">우르르란? 툴팁 닫기</span></span></a>
+										<div class="ssg-tooltip-layer cmunit_tt_urr_layer" role="tooltip" aria-label="우르르란?">
+											기간 내 목표 달성 시 최종 결제 및<br />배송이 진행되는 상품입니다.
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="cmunit_deal_count cmunit_ty_obj">오반장 860개 구매중</div>
+							<div class="cmunit_deal_count cmunit_ty_hb">해피바이러스 3,860개 구매중</div>
+							<div class="cmunit_deal_count">860개 구매중</div>
+						</div>
+						<div class="cmunit_sideinfo_block cmunit_ty_user">
+							<div class="cmunit_review_area">
+								<span class="cmunit_ic_review"></span>
+								<span class="blind">상품평점 5점 만점에</span><span class="cmunit_review_score">4.8점</span>
+								<span class="blind">상품평</span><span class="cmunit_review_num">248건</span>
+							</div>
+							<span class="cmunit_o2o_bdg">청계점 픽업</span>
+							<span class="cmunit_o2o_bdg">퀵배송</span>
+							<div class="cmunit_o2o_bdg cmunit_magicpick_area">
+								<span class="cmunit_magicpick">매직픽업<button type="button" class="cmunit_btn_magicpick_tt"><span class="blind">매직픽업 점포 툴팁 열기</span></button></span>
+								<div class="cmunit_magicpick_tt_layer" role="tooltip" aria-label="매직픽업 점포">
+									<em>영등포점</em> / <em>강남점</em> / <em>센텀시티점</em> / <em>광주신세계</em>
+								</div>
+							</div>
+						</div>
+						<div class="cmunit_sideinfo_block cmunit_ty_bene">
+							<span class="cmunit_bene_bdg">N+1</span>
+							<span class="cmunit_bene_bdg">사은품</span>
+							<span class="cmunit_bene_bdg">다다익선</span>
+							<span class="cmunit_bene_bdg">3for2</span>
+							<span class="cmunit_bene_bdg">2입기획</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			[[% endif %]]
+		</div>
+	</div>
+</div>
+[[% endmacro %]]

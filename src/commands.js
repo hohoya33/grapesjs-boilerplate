@@ -1,5 +1,4 @@
 //import openImport from "./openImport";
-
 export default (editor, config) => {
 	const cm = editor.Commands;
 	const txtConfirm = config.textCleanCanvas;

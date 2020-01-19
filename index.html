@@ -6,6 +6,7 @@
 		<link href="//unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet" />
 		<script src="//unpkg.com/grapesjs"></script>
 		<script src="dist/grapesjs-plugin-boilerplate.min.js"></script>
+		<script src="dist/grapesjs-plugin-export.min.js"></script>
 		<style>
 			body,
 			html {
@@ -21,15 +22,34 @@
 			var editor = grapesjs.init({
 				height: "100%",
 				noticeOnUnload: 0,
-				storageManager: { autoload: 0 },
+				protectedCss: "* { box-sizing: initial; }",
+				storageManager: { type: "indexeddb", autosave: false, autoload: false },
 				container: "#gjs",
 				fromElement: true,
-				plugins: ["grapesjs-plugin-boilerplate"],
+				plugins: ["grapesjs-plugin-boilerplate", "grapesjs-plugin-export"],
 				pluginsOpts: {
-					"grapesjs-plugin-boilerplate": { some: "value" }
+					"grapesjs-plugin-boilerplate": { some: "value" },
+					"grapesjs-plugin-export": {
+						"test.css": editor => editor.getCss(),
+						"test.html": editor => console.log(editor.getHtml())
+					}
 				}
+				// canvas: {
+				// 	styles: [["http://svn.ssgadm.com/ssgui/01.ssg/mobile/trunk/dist/css/m_layout.css"], ["http://svn.ssgadm.com/ssgui/01.ssg/mobile/trunk/dist/css/m_com.css"], ["http://svn.ssgadm.com/ssgui/01.ssg/mobile/trunk/dist/css/cmunit.css"]],
+				// 	scripts: ["http://svn.ssgadm.com/ssgui/01.ssg/mobile/trunk/js/lib/jquery-1.9.1.min.js", "http://ui.ssgcdn.com/ui/m_ssg/js/ssg-mobile.pluginset-1.0.min.js", "http://ui.ssgcdn.com/ui/m_ssg/js/ssg-mobile.layoutset-1.0.min.js"]
+				// }
 			});
 			window.editor = editor;
+
+			editor.on("storage:load", function(e) {
+				console.log("STORAGE:LOAD ", e);
+			});
+			editor.on("storage:store", function(e) {
+				console.log("STORAGE:STORE ", e);
+			});
+			editor.on("storage:error", function(e) {
+				console.log("STORAGE:ERROR ", e);
+			});
 		</script>
 	</body>
 </html>
